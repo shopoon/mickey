@@ -1,0 +1,13 @@
+<% [:notice, :error, :alert].each do |level| %>
+  <% unless flash[level].blank? %>
+    <div class="alert alert-<%= flash_class(level) %>">
+      <% if flash[level].is_a?(Array) %>
+        <% flash[level].each do |message| %>
+          <%= content_tag :p, raw(message) %>
+        <% end %>
+      <% else %>
+        <%= content_tag :p, raw(flash[level]) %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

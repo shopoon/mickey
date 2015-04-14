@@ -1,0 +1,37 @@
+<div class="col-sm-offset-1 col-sm-9">
+  <div class="page-header">
+    <h1>新規ケージ登録</h1>
+  </div>
+  <%= form_tag url_for(:action => :create), method: :post do %>
+    <div class="row">
+      <div class="col-sm-2">遺伝子型</div>
+      <div class="col-sm-2">ケージ番号</div>
+      <div class="col-sm-3">誕生日</div>
+      <div class="col-sm-2">♂</div>
+      <div class="col-sm-2">♀</div>
+    </div>
+    <% (1..@count).each do |num| %>
+      <div class="row form-group">
+        <div class="col-sm-2">
+          <%= text_field_tag "families[#{num}][genotype]", @genotype, placeholder: "遺伝子型", disabled: true, class: 'form-control' %>
+        </div>
+        <div class="col-sm-2">
+          <%= number_field_tag "families[#{num}][number]", @latest_number + num, placeholder: "ケージ番号", class: 'form-control' %>
+        </div>
+        <div class="col-sm-3">
+          <%= date_field_tag "families[#{num}][birth]", Date.today, class: 'form-control' %>
+        </div>
+        <div class="col-sm-2">
+          <%= number_field_tag "mice[#{num}][male_count]", nil, placeholder: "♂", class: 'form-control'  %>
+        </div>
+        <div class="col-sm-2">
+          <%= number_field_tag "mice[#{num}][female_count]", nil, placeholder: "♀", class: 'form-control'  %>
+        </div>
+      </div>
+    <% end %>
+    <div class="btn-group">
+      <%= submit_tag t('.save', :default => t("helpers.links.save")), :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")), families_path, :class => 'btn btn-default' %>
+    </div>
+  <% end %>
+</div>

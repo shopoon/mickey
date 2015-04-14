@@ -1,0 +1,42 @@
+<div class="page-header">
+  <h1>マウス一覧</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>個体番号</th>
+      <th>♂/♀</th>
+      <th>状態</th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @mice.each do |mouse| %>
+      <tr>
+        <td><%= link_to mouse.id, mouse_path(mouse) %></td>
+        <td><%= mouse.display_name %></td>
+        <td><%= raw convert_sex(mouse.sex) %></td>
+        <td><%= t(".#{mouse.status}", :default => t("activerecord.mice.status.#{mouse.status}")) %></td>
+        <td>
+          <% Mouse.status.values.each do |value| %>
+            <% next if ["mating", "available"].include?(value) %>
+            <%= link_to t(".#{value}", :default => t("activerecord.mice.status.#{value}")), url_for(action: :change_status, id: mouse.id, status: value, family_id: params[:family_id]), class: "btn btn-sm btn-primary" %>
+          <% end %>
+          <% if super_admin_user? %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      mouse_path(mouse),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-sm btn-danger' %>
+                  <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @mice %>
+
+<%= content_for :sidebar do %>
+  <%= render 'shared/mouse_sidebar' %>
+<% end %>

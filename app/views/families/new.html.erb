@@ -1,0 +1,32 @@
+<div class="col-sm-offset-4 col-sm-4">
+  <div class="page-header">
+    <h1>新規ケージ登録</h1>
+  </div>
+  
+  <%= form_tag url_for(:action => :register), :method => :get, :html => { :class => 'form-horizontal' } do %>
+ 
+    <div class="form-group">
+      <%= label_tag "遺伝子型" %>
+      <div class="input-group">
+        <%= select_tag :genotype, options_for_select(Family.genotype.options), class: 'form-control', required: true %>
+        <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag "新規ケージ数" %>
+      <div class="input-group" data-validate="number">
+        <%= number_field_tag :count, nil, min: 1, class: 'form-control', required: true %>
+        <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+      </div>
+    </div>
+
+  <div class="btn-group pull-right">
+    <%= submit_tag t('.next', :default => t("helpers.links.next")), :class => 'btn btn-primary', :disabled => true %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+      couples_path, :class => 'btn btn-default' %>
+  </div>
+  <% end %>
+</div>
+
+<%= javascript_include_tag "form" %>

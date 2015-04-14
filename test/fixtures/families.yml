@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: MyString
+  genotype_id: 1
+  birth: 2014-05-21 11:22:08
+  parent_id: 1
+
+two:
+  number: MyString
+  genotype_id: 1
+  birth: 2014-05-21 11:22:08
+  parent_id: 1

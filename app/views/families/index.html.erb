@@ -1,0 +1,69 @@
+<div class="page-header">
+  <h1>ケージ一覧</h1>
+</div>
+<div class="panel-body">
+  <%= form_tag url_for(action: :index), method: :get, class: 'form-inline' do %>
+    <div class="form-group">
+      <%= label_tag '遺伝子型' %>:
+      <%= select_tag :genotype, options_for_select(Family.genotype.options, params[:genotype]), class: 'form-control' %>
+    </div> <!-- form group [rows] -->
+    <div class="form-group ml10">
+      <%= label_tag '♂/♀' %>:
+      <%= select_tag :sex, options_for_select(Mouse.sex.options, params[:sex]), class: 'form-control' %>
+    </div><!-- form group [search] -->
+    <div class="form-group ml10">
+      <%= label_tag '誕生日' %>:
+      <%= date_field_tag :since, @since, class: 'form-control' %>~
+      <%= date_field_tag :until, @until, class: 'form-control' %>
+    </div> <!-- form group [order by] --> 
+    <div class="form-group ml10">
+      <%= submit_tag "検索", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>遺伝子型</th>
+      <th>ケージ番号</th>
+      <th>誕生日</th>
+      <th>♂</th>
+      <th>♀</th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @families.each do |family| %>
+      <tr>
+        <td><%= family.id %></td>
+        <td><%= family.genotype %></td>
+        <td><%= family.number %></td>
+        <td><%= family.birth %></td>
+        <td><%= family.male_count %>匹</td>
+        <td><%= family.female_count %>匹</td>
+        <td>
+          <%= link_to t('.detail', :default => t("helpers.links.detail")),
+                      list_mice_path(family.id), :class => 'btn btn-sm btn-default' %>
+          <% if admin_user? %>
+                        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                          family_path(family),
+                          :method => :delete,
+                          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                          :class => 'btn btn-sm btn-danger' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @families %>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_family_path,
+            :class => 'btn btn-primary' %>
+          
+<%= content_for :sidebar do %>
+  <%= render 'shared/mouse_sidebar' %>
+<% end %>
