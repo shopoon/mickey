@@ -17,8 +17,8 @@ gem 'coffee-rails', '~> 4.0.0'
 # twitter bootstrap css & javascript toolkit
 gem 'bootstrap-sass'
 gem 'bootstrap-sass-extras'
-
-gem 'therubyracer'
+gem 'libv8', '3.16.14.7'
+gem 'therubyracer', '0.12.1'
 gem 'enumerize'
 gem 'devise'
 
