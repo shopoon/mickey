@@ -20,7 +20,6 @@
         <td><%= t(".#{mouse.status}", :default => t("activerecord.mice.status.#{mouse.status}")) %></td>
         <td>
           <% Mouse.status.values.each do |value| %>
-            <% next if ["mating", "available"].include?(value) %>
             <%= link_to t(".#{value}", :default => t("activerecord.mice.status.#{value}")), url_for(action: :change_status, id: mouse.id, status: value, family_id: params[:family_id]), class: "btn btn-sm btn-primary" %>
           <% end %>
           <% if super_admin_user? %>

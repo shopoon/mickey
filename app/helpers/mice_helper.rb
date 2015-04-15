@@ -16,12 +16,8 @@ module MiceHelper
       return "利用可能"
     when :reserved
       return "予約済み"
-    when :breed
-      return "繁殖用"
-    when :convention
-      return "搬出済み"
-    when :dead
-      return "死亡"
+    when :used
+      return "使用済み"
     else 
       return ""
     end

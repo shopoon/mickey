@@ -25,7 +25,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>ID</th>
       <th>遺伝子型</th>
       <th>ケージ番号</th>
       <th>誕生日</th>
@@ -37,7 +36,6 @@
   <tbody>
     <% @families.each do |family| %>
       <tr>
-        <td><%= family.id %></td>
         <td><%= family.genotype %></td>
         <td><%= family.number %></td>
         <td><%= family.birth %></td>

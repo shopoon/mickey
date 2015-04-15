@@ -3,7 +3,7 @@ class Mouse < ActiveRecord::Base
 
   extend Enumerize
   enumerize :sex, in: [:male, :female], default: :male 
-  enumerize :status, in: [:available, :waiting, :mating, :reserved, :convention, :dead], default: :available
+  enumerize :status, in: [:available, :reserved, :used], default: :available
 
   scope :available, -> { where(status: :available) }
   scope :by_family_id, -> (family_id) { where(family_id: family_id).default_order }

@@ -8,7 +8,7 @@ class MiceController < ApplicationController
   end
 
   def list
-    @mice = Mouse.by_family_id(params[:family_id])
+    @mice = Mouse.by_family_id(params[:family_id]).page(params[:page]).per(PER_PAGE)
     render action: :index
   end
 

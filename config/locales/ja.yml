@@ -196,12 +196,9 @@ ja:
   activerecord:
     mice:
       status:
-        convention: "搬出"
-        dead: "死亡"
         reserved: "予約"
         available: "利用可能"
-        waiting: "繁殖待機"
-        mating: "繁殖中"
+        used: "使用済み"
     models:
       family: Cage
     attributes:
