@@ -1,5 +1,6 @@
 class Mouse < ActiveRecord::Base
   belongs_to :family
+  belongs_to :reserve
 
   extend Enumerize
   enumerize :sex, in: [:male, :female], default: :male 
@@ -19,4 +20,5 @@ class Mouse < ActiveRecord::Base
   def update_status(status)
     self.update_attributes(status: status)
   end
+
 end

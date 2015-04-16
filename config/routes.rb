@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       get :register
     end
   end
-  resources :reserves, only: [:index]
+  resources :reserves
   resources :top, only: [:index]
   resources :users
 

@@ -42,6 +42,7 @@
         <td><%= family.male_count %>匹</td>
         <td><%= family.female_count %>匹</td>
         <td>
+          <%= link_to t(".reserved", :default => t("helpers.links.reserve")), url_for(controller: :reserves, action: :new, family_id: family.id) , :class => 'btn btn-sm btn-success' %>
           <%= link_to t('.detail', :default => t("helpers.links.detail")),
                       list_mice_path(family.id), :class => 'btn btn-sm btn-default' %>
           <% if admin_user? %>

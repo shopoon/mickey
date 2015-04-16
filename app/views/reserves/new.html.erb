@@ -1,0 +1,38 @@
+<div class="col-sm-offset-3 col-sm-6">
+<div class="page-header">
+  <h1>新規予約</h1>
+</div>
+<%= form_tag url_for(:action => :create), :method => :post do %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th>個体番号</th>
+        <th>♂/♀</th>
+        <th>状態</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @mice.each do |mouse| %>
+        <tr>
+          <td><%= check_box_tag "mouse_ids[]", mouse.id, false, disabled: !mouse.status.available? %></td>
+          <td><%= mouse.display_name %></td>
+          <td><%= raw convert_sex(mouse.sex) %></td>
+          <td><%= t(".#{mouse.status}", :default => t("activerecord.mice.status.#{mouse.status}")) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <div class="form-group ml10">
+    <%= label_tag '使用予定日' %>:
+    <%= date_field_tag :use_at, Time.current, class: 'form-control' %>
+  </div> 
+
+  <div class="btn-group pull-right">
+    <%= submit_tag "予約する", :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+      reserves_path, :class => 'btn btn-default' %>
+  </div>
+<% end %>
+</div>

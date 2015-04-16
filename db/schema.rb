@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20150415000001) do
     t.string   "sex"
     t.integer  "sequence_id"
     t.string   "status"
+    t.integer  "reserve_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -38,7 +39,6 @@ ActiveRecord::Schema.define(version: 20150415000001) do
 
   create_table "reserves", force: true do |t|
     t.integer  "user_id"
-    t.integer  "mouse_id"
     t.integer  "family_id"
     t.datetime "reserved_at"
     t.datetime "use_at"

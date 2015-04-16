@@ -5,6 +5,7 @@ class CreateMice < ActiveRecord::Migration
       t.string :sex
       t.integer :sequence_id
       t.string :status
+      t.integer :reserve_id
 
       t.timestamps
     end

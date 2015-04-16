@@ -1,0 +1,52 @@
+<div class="page-header">
+  <h1>予約一覧</h1>
+</div>
+<div class="panel-body">
+  <%= form_tag url_for(action: :index), method: :get, class: 'form-inline' do %>
+    <div class="form-group">
+      <%= label_tag '名前' %>:
+      <%= select_tag :username, options_for_select(Family.genotype.options, params[:username]), class: 'form-control' %>
+    </div> 
+    <div class="form-group ml10">
+      <%= submit_tag "検索", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>予約者</th>
+      <th>遺伝子</th>
+      <th>ケージ番号</th>
+      <th>誕生日</th>
+      <th>♂</th>
+      <th>♀</th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reserves.each do |reserve| %>
+      <tr>
+        <td><%= reserve.user.name %></td>
+        <td><%= reserve.family.genotype %></td>
+        <td><%= link_to reserve.family.number, list_mice_path(reserve.family_id) %></td>
+        <td><%= reserve.family.birth %></td>
+        <td><%= @male_count[reserve.id] %>匹</td>
+        <td><%= @female_count[reserve.id] %>匹</td>
+        <td>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+            reserve_path(reserve),
+            :method => :delete,
+            :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+            :class => 'btn btn-sm btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @reserves %>
+
+<%= content_for :sidebar do %>
+  <%= render 'shared/mouse_sidebar' %>
+<% end %>

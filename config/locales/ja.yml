@@ -135,6 +135,7 @@ ja:
       create: 登録する
       submit: 保存する
       update: 更新する
+      reserve: 予約する
   number:
     currency:
       format:
@@ -196,7 +197,7 @@ ja:
   activerecord:
     mice:
       status:
-        reserved: "予約"
+        reserved: "予約済み"
         available: "利用可能"
         used: "使用済み"
     models:

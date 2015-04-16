@@ -13,6 +13,7 @@ ja:
       send: "送信"
       save: "保存"
       detail: "詳細"
+      reserve: "予約"
     titles:
       edit: "%{model}の編集"
       index: "%{model}の一覧"

@@ -17,9 +17,13 @@
         <td><%= link_to mouse.id, mouse_path(mouse) %></td>
         <td><%= mouse.display_name %></td>
         <td><%= raw convert_sex(mouse.sex) %></td>
-        <td><%= t(".#{mouse.status}", :default => t("activerecord.mice.status.#{mouse.status}")) %></td>
+        <td>
+          <%= t(".#{mouse.status}", :default => t("activerecord.mice.status.#{mouse.status}")) %>
+          <%= "(#{mouse.reserve.user.name})" if mouse.reserve.present? %>
+        </td>
         <td>
           <% Mouse.status.values.each do |value| %>
+            <% next if ["reserved", mouse.status].include? value %>
             <%= link_to t(".#{value}", :default => t("activerecord.mice.status.#{value}")), url_for(action: :change_status, id: mouse.id, status: value, family_id: params[:family_id]), class: "btn btn-sm btn-primary" %>
           <% end %>
           <% if super_admin_user? %>
