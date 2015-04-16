@@ -11,16 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140630072437) do
-
-  create_table "couples", force: true do |t|
-    t.integer  "mother_id"
-    t.integer  "father_id"
-    t.datetime "mated_at"
-    t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20150415000001) do
 
   create_table "families", force: true do |t|
     t.string   "number"
@@ -44,6 +35,14 @@ ActiveRecord::Schema.define(version: 20140630072437) do
   end
 
   add_index "mice", ["family_id", "sex", "sequence_id"], name: "index_mice_on_family_id_and_sex_and_sequence_id", unique: true
+
+  create_table "reserves", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "mouse_id"
+    t.integer  "family_id"
+    t.datetime "reserved_at"
+    t.datetime "use_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

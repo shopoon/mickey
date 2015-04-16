@@ -14,14 +14,7 @@ Rails.application.routes.draw do
       get :register
     end
   end
-  resources :couples, only: [:new, :create, :index, :destroy] do
-    member do
-      get :update_status
-    end
-    collection do
-      get :register
-    end
-  end
+  resources :reserves, only: [:index]
   resources :top, only: [:index]
   resources :users
 

@@ -1,33 +1,21 @@
 class MiceController < ApplicationController
   before_action :set_mouse, only: [:show, :edit, :update, :destroy, :change_status]
 
-  # GET /mice
-  # GET /mice.json
-  def index
-    @mice = Mouse.page(params[:page]).per(PER_PAGE)
-  end
-
   def list
     @mice = Mouse.by_family_id(params[:family_id]).page(params[:page]).per(PER_PAGE)
     render action: :index
   end
 
-  # GET /mice/1
-  # GET /mice/1.json
   def show
   end
 
-  # GET /mice/new
   def new
     @mouse = Mouse.new
   end
 
-  # GET /mice/1/edit
   def edit
   end
 
-  # POST /mice
-  # POST /mice.json
   def create
     @mouse = Mouse.new(mouse_params)
 
@@ -42,8 +30,6 @@ class MiceController < ApplicationController
     end
   end
 
-  # PATCH/PUT /mice/1
-  # PATCH/PUT /mice/1.json
   def update
     respond_to do |format|
       if @mouse.update(mouse_params)
@@ -56,8 +42,6 @@ class MiceController < ApplicationController
     end
   end
 
-  # DELETE /mice/1
-  # DELETE /mice/1.json
   def destroy
     @mouse.destroy
     respond_to do |format|

@@ -6,6 +6,7 @@ class Family < ActiveRecord::Base
   validates :birth, presence: true
 
   has_many :mice
+  has_one :reserve
 
   scope :by_genotype, -> (genotype) { where(genotype: genotype) }
 
